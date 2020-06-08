@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 RUN pip install -U pipenv \
   && export PATH=$(realpath ~)/.local/bin:$PATH \
   && pip install \
-     Cython==0.27.3 \
+    Cython==0.27.3 \
     cymem==1.31.2 \
     preshed==1.0.1 \
     thinc==6.10.3 \
@@ -22,4 +22,3 @@ RUN pip install -U pipenv \
 RUN apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get remove --auto-remove build-essential -y
-  
