@@ -2,8 +2,13 @@ FROM python:3.7-slim
 
 RUN apt-get update \
   && apt-get upgrade -y \
-  && apt-get install -y --no-install-recommends build-essential git \
-  && rm -rf /var/lib/apt/lists/* 
+  && apt-get install -y git \
+    curl \
+    make \
+    wget \
+    python-pip \
+    libpq-dev \
+    python2.7
 
 RUN pip install --upgrade pip
 
@@ -19,6 +24,14 @@ RUN pip install -U pipenv \
     regex==2017.4.5 \
   && pip install git+https://github.com/KurioApp/spaCy.git@8aa806d4c6031d7b6929edb01f86be41b89aae10#egg=spacy
 
-RUN apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
-  && apt-get remove --auto-remove build-essential -y
+RUN apt-get remove --purge -y git \
+    curl \
+    make \
+    wget \
+    python-pip \
+    libpq-dev \
+    python2.7
+
+RUN apt-get autoremove -y \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
